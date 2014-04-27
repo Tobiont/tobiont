@@ -1,0 +1,195 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Tobiont</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Tobiont</h1>
+    </header>
+    <div id="container">
+      <p class="tagline"></p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/Tobiont/tobiont/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/Tobiont/tobiont/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/Tobiont/tobiont" class="code">View Tobiont on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h1>
+
+<p>Tobiot is an evolution simulation which attempts to go beyond the existing or previously do research in this area and create a simulation where very complex behaviors can arise. This is achieved in a few specific ways:
+The simulated creature’s logic or brain will run a full, turing-complete, instruction set which parallels a modern high-level programming language.
+This simulation gameboard will be large and dynamic to create differentiation and specialization pressures in the simulated creatures.</p>
+
+<h3>
+<a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway’s Game of Life</a> was interesting because of the dynamism and complexity that arose from a simulation with very succinct and simple rules. As simulators grew more advanced they more frequently modeled themselves on real-world biological systems and due to that increasing complexity they also reduced in scope due to computing power. Eventually simulations were attempting to model a few dozen creatures at most and if they were run for any length of time, the simulations quickly reached a stable end-state equilibrium and progress no further.</p>
+
+<p>While some research is still being done on Conway’s Game of Life, and biologists are certainly still using models to analyse and predict real world ecologies, little research is still being done or has been done on life simulators in the last decade.</p>
+
+<h3>
+<a name="goals" class="anchor" href="#goals"><span class="octicon octicon-link"></span></a>Goals</h3>
+
+<p>The primary goal of this project are to see if more complex behaviors will arise from an evolution simulation if we increase the simulation’s complexity. To catalog those behaviors and try to find parallels to the real world or unique new behaviors not found in nature.</p>
+
+<p>A hypothetical example of some things we may look for:
+Do behaviors of simulated creatures begin to fall into common predator-prey relationships
+Do recognizable real world programming patterns ever arise from the simulated creature’s code</p>
+
+<h3>
+<a name="non-goals" class="anchor" href="#non-goals"><span class="octicon octicon-link"></span></a>Non-Goals</h3>
+
+<p>When neccessary this simulation will adopt real world paradigms such as the need for creatures to eat. But we are not attempting to create a simulation which mirrors real life or overly adopts real world patterns without reason.</p>
+
+<p>As an example, a requirement to eat may be adopted for the purpose of applying selection pressure on the simulated creature. Without some pressures on the creatures, they would just be running random code to no end. But in contrast we may choose to not implement any kind of physics for the simulation if the only goal of physics is to mirror reality.</p>
+
+<h2>
+<a name="top-level-systems" class="anchor" href="#top-level-systems"><span class="octicon octicon-link"></span></a>Top level systems</h2>
+
+<h3>
+<a name="gameboard" class="anchor" href="#gameboard"><span class="octicon octicon-link"></span></a>Gameboard</h3>
+
+<p>The gameboard should be a square grid upon which the creatures act. It is responsible for generating food for the creatures and for handling movement on the game board grid. The gameboard can be described as a taxonomy of large regions which contain local biomes which are made up of individual gameboard cells. Each cell is a tile of the grid which may or may not contain one creature.</p>
+
+<p>The gameboard should generate resources variably based on regional and local variables. For example a region may simulate ‘seasons’ by increasing and diminishing overall resource production in a long cycle, and this regional season will affect the overall output of all biomes in the region</p>
+
+<p>An individual biome may vary resource production in many ways based on unique patterns. For example a biome may generate resources like ‘rain’ which constantly dribbles out small amounts all over the biome. Or it may resemble the ocean bottom’s thermal vents by having a few very productive spouts of resources in a fixed places and a pattern of spreading accumulates resources out from the spouts.</p>
+
+<p>Biomes should also have the ability to manipulate objects upon them. For example a biome might resemble a river by moving tiles in a certain direction every few tics. </p>
+
+<h3>
+<a name="creature" class="anchor" href="#creature"><span class="octicon octicon-link"></span></a>Creature</h3>
+
+<p>The creature should be an autonomous object on the gameboard who will be capable of moving, interacting with the game board, and interacting with other creatures in proximity to itself.</p>
+
+<p>A creature will operate based on a list of code or code-like instructions and ‘run’ these instructions to perform actions. </p>
+
+<h4>
+<a name="instruction-set" class="anchor" href="#instruction-set"><span class="octicon octicon-link"></span></a>Instruction set</h4>
+
+<p>Each individual creature should have an instruction set or code that defines how it operates. This should include standard high level programming language idioms such as Branching statements, loops, etc. Details below.</p>
+
+<p>List of command words (elements of the language):  if, else, for and while loops, break, creating temporary variables, assigning values to variables, AND, OR, NOT, = </p>
+
+<p>More artificial commands: eat, move, attack </p>
+
+<p>Based on external or internal factors, the Creature’s code should be manipulatable</p>
+
+<h2>
+<a name="ancillary-systems" class="anchor" href="#ancillary-systems"><span class="octicon octicon-link"></span></a>Ancillary Systems</h2>
+
+<h3>
+<a name="monitorvisualizer" class="anchor" href="#monitorvisualizer"><span class="octicon octicon-link"></span></a>Monitor/Visualizer</h3>
+
+<p>Takes the raw gameboard and renders the activity in a human readable manner. The purposes is to provide a tool for developers to monitor the simulation’s activity.</p>
+
+<h3>
+<a name="creature-optimizer" class="anchor" href="#creature-optimizer"><span class="octicon octicon-link"></span></a>Creature Optimizer</h3>
+
+<p>Due to the randomness of mutation, each creature’s instruction set is naturally going to contain a lot of cruft and commands which are essentially useless or no-ops. The optimizer will take a creature’s instruction set and render it down to fast implementation code; reducing ‘no op’ commands to a sleep command, simplifying loops, etc. This allows the simulation to run faster while preserving continuous time for the creature in ticks.</p>
+
+<h3>
+<a name="simulation-analyzer" class="anchor" href="#simulation-analyzer"><span class="octicon octicon-link"></span></a>Simulation Analyzer</h3>
+
+<p>Keeps track of each generation of creature, their instruction sets, lineages, and populations. The purpose here is to enable the analysis of instruction sets to see which creatures were most effective, and to capture any interesting behaviors.</p>
+
+<h2>
+<a name="specific-requirements" class="anchor" href="#specific-requirements"><span class="octicon octicon-link"></span></a>Specific Requirements</h2>
+
+<h3>
+<a name="creature-1" class="anchor" href="#creature-1"><span class="octicon octicon-link"></span></a>Creature:</h3>
+
+<ul>
+<li>Can move on the game board</li>
+<li>Can consume resources</li>
+<li>Can reproduce (create a new empty creature)</li>
+<li>Can transfer code to its young or other creatures</li>
+<li>Can “see” the spaces on the gameboard around it</li>
+<li>Can attack other creatures (delete their code)</li>
+<li>Is programmable</li>
+</ul><h3>
+<a name="gameboard-1" class="anchor" href="#gameboard-1"><span class="octicon octicon-link"></span></a>Gameboard:</h3>
+
+<ul>
+<li>Generates resources</li>
+<li>Defines biomes and ‘weather’ through the biome-specific resource generation method.</li>
+<li>Handles Creature movement</li>
+</ul><h3>
+<a name="monitor" class="anchor" href="#monitor"><span class="octicon octicon-link"></span></a>Monitor:</h3>
+
+<ul>
+<li>Displays gameboard</li>
+<li>Displays population, time</li>
+<li>Has controls for setting the initial conditions of the simulation</li>
+<li>Has controls for starting and stopping the simulation, changing the speed</li>
+</ul><h3>
+<a name="creature-optimizer-1" class="anchor" href="#creature-optimizer-1"><span class="octicon octicon-link"></span></a>Creature Optimizer:</h3>
+
+<ul>
+<li>Cuts out bad syntax</li>
+<li>Simplifies verbose code</li>
+<li>Defines a metric for the difference between two creatures’ code
+
+<ul>
+<li>Defines some minimum difference between creatures of different “species”</li>
+</ul>
+</li>
+</ul><h3>
+<a name="simulation-analyzer-1" class="anchor" href="#simulation-analyzer-1"><span class="octicon octicon-link"></span></a>Simulation Analyzer:</h3>
+
+<ul>
+<li>Keeps track of evolutionary trees:
+
+<ul>
+<li>Tracks lineages and the time at which each species develops</li>
+<li>Notes average lifespan of each species</li>
+<li>Tracks the population of each species</li>
+</ul>
+</li>
+</ul>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/Tobiont" class="avatar"><img src="https://avatars1.githubusercontent.com/u/7156251?s=60" width="48" height="48"/></a> <a href="https://github.com/Tobiont">Tobiont</a> maintains <a href="https://github.com/Tobiont/tobiont">Tobiont</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/Tobiont/tobiont/tarball/master" class="tar">tar</a><a href="https://github.com/Tobiont/tobiont/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
