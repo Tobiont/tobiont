@@ -9,8 +9,8 @@ class TransferError(Error):
 class SquareOccupiedError(TransferError):
   """Failure to move a creature from one square to another."""
 
-BOARD_X_SIZE = 10
-BOARD_Y_SIZE = 10
+BOARD_X_SIZE = 20
+BOARD_Y_SIZE = 20
 
-DEMO_LENGTH_SECONDS = 2
-DEMO_SPEED_SECONDS = 1
+DEMO_LENGTH_SECONDS = 60
+DEMO_SPEED_SECONDS = .5

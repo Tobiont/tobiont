@@ -32,18 +32,15 @@ class Gameboard(object):
 class GameSquare(object):
   """A single location square in the gameboard."""
 
-  _grid_x_y_tuple = None
-  _resources = {}
-  _contents = None
   _observers = []
-  _weather_rules = None
 
   def __init__(self, resources, weather, location_tuple):
     super(GameSquare, self).__init__()
 
-    self._resources.update(resources)
+    self._resources = resources.copy()
     self._weather_rules = weather
     self._grid_x_y_tuple = location_tuple
+    self._contents = None
 
   def moveCreatureToSquare(self, creature):
     """Adds a creature to this square or throws SquareOccupiedError."""

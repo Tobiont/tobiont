@@ -6,8 +6,8 @@ class Resource(object):
   _quantity = 0
 
   def __init__(self, type, quantity):
-    self.type = type
-    self.quantity = quantity
+    self._type = type
+    self._quantity = quantity
 
   def getResource(self):
     return self._quantity
