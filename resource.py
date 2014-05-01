@@ -1,13 +1,11 @@
 """A container representing an amount of a game resource or food."""
 
-class resource(object):
+class Resource(object):
 	"""Container for resources."""
 	_type = ""
 	_quantity = 0
 
 	def __init__(self, type, quantity):
-		super(Gameboard, self).__init__()
-
 		self.type = type
 		self.quantity = quantity
 

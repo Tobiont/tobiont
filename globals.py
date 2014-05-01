@@ -9,5 +9,5 @@ class TransferError(Error):
 class SquareOccupiedError(TransferError):
 	"""Failure to move a creature from one square to another."""
 
-BOARD_X_SIZE = 100
-BOARD_Y_SIZE = 100
+BOARD_X_SIZE = 5
+BOARD_Y_SIZE = 5
