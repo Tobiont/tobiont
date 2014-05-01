@@ -49,12 +49,18 @@ class GameSquare(object):
     """Adds a creature to this square or throws SquareOccupiedError."""
     self._contents = creature
 
+  def getResource(self, type):
+  	"""Returns current square resources"""
+  	return self._resources[type]
+
   def withdrawResource(self, resource):
     """Removes a resource from the square and returns it."""
     if resource.getResource() == 0:
       return
+    elif self._resources[resource.getType()] <= resource.getResource():
+      self._resources[resource.getType()] == 0
     else:
-      self._resources[resource.getType()] == resource.getResource()
+      self._resources[resource.getType()] -= resource.getResource()
 
   def addResource(self, resource):
     """Adds a resource to this square."""

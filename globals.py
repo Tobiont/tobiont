@@ -11,3 +11,6 @@ class SquareOccupiedError(TransferError):
 
 BOARD_X_SIZE = 10
 BOARD_Y_SIZE = 10
+
+DEMO_LENGTH_SECONDS = 2
+DEMO_SPEED_SECONDS = 1
