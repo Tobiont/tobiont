@@ -11,29 +11,39 @@ class Gameboard(object):
     super(Gameboard, self).__init__()
 
     for x in range(0, globals.BOARD_X_SIZE):
+      
+      grid_column = []
       for y in range(0, globals.BOARD_Y_SIZE):
-        self._board[x][y] = self._createGameSquare()
+        grid_column.append(self._createGameSquare(x, y))
+      self._board.append(grid_column)
 
-  def _createGameSquare(self):
-    weather = RaineyWeather('defaultRegion', 'RaineyBiome')
-    return GameSquare(resource.Resource('basic', 1), weather)
+  def _createGameSquare(self, x, y):
+    square_weather = weather.RaineyWeather('defaultRegion', 'RaineyBiome')
+    return GameSquare({'basic': 1}, square_weather, (x, y))
 
   def getSquare(self, x, y):
     return self._board[x][y]
 
+  def processGameboard(self):
+    for x in range(0, globals.BOARD_X_SIZE):
+      for y in range(0, globals.BOARD_Y_SIZE):
+        self._board[x][y].processWeather()
+
 class GameSquare(object):
   """A single location square in the gameboard."""
 
+  _grid_x_y_tuple = None
   _resources = {}
   _contents = None
   _observers = []
   _weather_rules = None
 
-  def __init__(self, resources, weather):
-    super(Gamesquare, self).__init__()
+  def __init__(self, resources, weather, location_tuple):
+    super(GameSquare, self).__init__()
 
     self._resources.update(resources)
     self._weather_rules = weather
+    self._grid_x_y_tuple = location_tuple
 
   def moveCreatureToSquare(self, creature):
     """Adds a creature to this square or throws SquareOccupiedError."""

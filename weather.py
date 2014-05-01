@@ -3,12 +3,12 @@ from tobiont import resource
 
 
 class AbstractWeather(object):
-  _region = ""
-  _biome = ""
+  region = ""
+  biome = ""
 
   def __init__(self, region, biome):
-    self._region = region
-    self._biome = _biome
+    self.region = region
+    self.biome = biome
 
   def run(self):
     """Accepts reference to weather's owning gridsquare and runs rules.
@@ -26,9 +26,9 @@ class RaineyWeather(AbstractWeather):
   """
 
   def __init__(self, region, biome):
-    super(raineyWeather, self).__init__(region, biome)
+    super(RaineyWeather, self).__init__(region, biome)
 
-  def run(self):
+  def run(self, game_square):
     """Impliments weather rules.
 
     @override
@@ -38,8 +38,8 @@ class RaineyWeather(AbstractWeather):
 
     if rain_chance <= 1:
       #rain
-      self.addResource(resource('basic', 1))
+      game_square.addResource(resource.Resource('basic', 1))
     elif rain_chance >= 4:
       #dry up
-      self.removeResource(resource('basic', 1))
-
+      game_square.withdrawResource(resource.Resource('basic', 1))
+    #else do nothing
